@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).parent
-OUT = ROOT / "site"
+OUT = ROOT
 CFG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
 KEEP = {"font-weight", "font-style", "text-decoration", "vertical-align", "color",
         "background-color", "list-style-type", "content", "counter-reset",
@@ -79,9 +79,10 @@ def clean_block(el, pre, base, sess, imgs):
     return str(el)
 
 def main():
-    if OUT.exists():
-        shutil.rmtree(OUT)
-    (OUT / "img").mkdir(parents=True)
+    img_dir = ROOT / "img"
+    if img_dir.exists():
+        shutil.rmtree(img_dir)
+    img_dir.mkdir(parents=True, exist_ok=True)
     sess = requests.Session()
     sess.headers["User-Agent"] = "Mozilla/5.0"
     nodes, articles, css, imgs = [], [], [], {}
