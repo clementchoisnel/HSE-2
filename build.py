@@ -79,10 +79,10 @@ def clean_block(el, pre, base, sess, imgs):
     return str(el)
 
 def main():
-   img_dir = ROOT / "img"
+    img_dir = ROOT / "img"
     if img_dir.exists():
-     shutil.rmtree(img_dir)
- img_dir.mkdir(parents=True, exist_ok=True)
+        shutil.rmtree(img_dir)
+    img_dir.mkdir(parents=True, exist_ok=True)
     sess = requests.Session()
     sess.headers["User-Agent"] = "Mozilla/5.0"
     nodes, articles, css, imgs = [], [], [], {}
