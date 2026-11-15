@@ -12,9 +12,11 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).parent
 OUT = ROOT
 CFG = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
-KEEP = {"font-weight", "font-style", "text-decoration", "vertical-align", "color",
-        "background-color", "list-style-type", "content", "counter-reset",
-        "counter-increment", "text-align"}
+KEEP = {
+    "font-weight", "font-style", "text-decoration", "vertical-align", "color",
+    "background-color", "list-style-type", "content", "counter-reset",
+    "counter-increment", "text-align"
+}
 
 def filter_css(css, pre):
     out = []
@@ -48,8 +50,10 @@ def fetch_img(src, base, sess, cache):
         r = sess.get(src, timeout=60)
         r.raise_for_status()
         kind = r.headers.get("content-type", "").split(";")[0]
-        ext = {"image/jpeg": ".jpg", "image/gif": ".gif", "image/webp": ".webp",
-               "image/svg+xml": ".svg"}.get(kind, ".png")
+        ext = {
+            "image/jpeg": ".jpg", "image/gif": ".gif", "image/webp": ".webp",
+            "image/svg+xml": ".svg"
+        }.get(kind, ".png")
         name = "img/" + hashlib.sha1(src.encode()).hexdigest()[:16] + ext
         (OUT / name).write_bytes(r.content)
         cache[src] = name
@@ -110,7 +114,7 @@ def main():
                .replace("__DATE__", now)
                .replace("__TITLE__", CFG["titre"]))
     (OUT / "index.html").write_text(page, encoding="utf-8")
-    print(f"Site généré avec succès !")
+    print("Site généré avec succès !")
 
 if __name__ == "__main__":
     main()
