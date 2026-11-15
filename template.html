@@ -3,20 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>__TITLE__</title>
+    <title>HSE 2 S3 - Espace Pédagogique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        __DOCCSS__
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #333; }
-        h1, h2, h3 { color: #111; }
-        article { margin-top: 20px; }
+        :root {
+            --primary: #2563eb;
+            --primary-light: #eff6ff;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar / Navigation latérale */
+        sidebar {
+            width: 280px;
+            background: var(--card-bg);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .brand h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .brand span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .nav-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-item {
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .sub-nav {
+            padding-left: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin-top: 0.25rem;
+            border-left: 2px solid var(--border);
+            margin-left: 1rem;
+        }
+
+        .sub-nav a {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.75rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .sub-nav a:hover {
+            color: var(--primary);
+            background-color: var(--primary-light);
+        }
+
+        /* Contenu principal */
+        main {
+            margin-left: 280px;
+            flex: 1;
+            padding: 3rem;
+            max-width: 1000px;
+        }
+
+        .header-banner {
+            background: linear-gradient(135deg, #1e40af, #2563eb);
+            color: white;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-banner h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-banner p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* Style du contenu injecté */
+        h1, h2, h3 {
+            color: var(--text-main);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p, ul, ol {
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            sidebar {
+                display: none;
+            }
+            main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>__TITLE__</h1>
-    <p><em>Dernière mise à jour : __DATE__</em></p>
-    <hr>
-    <div class="content">
-        __ARTICLES__
-    </div>
+
+    <!-- Barre latérale de navigation structurée -->
+    <sidebar>
+        <div class="brand">
+            <h1>HSE 2 S3</h1>
+            <span>Espace Pédagogique</span>
+        </div>
+
+        <div class="nav-section">
+            <span class="nav-title">Modules / Profs</span>
+            <a href="#" class="nav-item active">👨‍🏫 Albert</a>
+            <div class="sub-nav">
+                <a href="#ergonomie">Ergonomie</a>
+            </div>
+        </div>
+
+        <div class="nav-section">
+            <span class="nav-title">Projets & Travaux</span>
+            <a href="#" class="nav-item">🛠️ SAE</a>
+            <div class="sub-nav">
+                <a href="#sae301">SAE 3.01</a>
+                <a href="#sae302">SAE 3.02</a>
+            </div>
+            <a href="#" class="nav-item">🇪🇸 Stage Espagne</a>
+        </div>
+
+        <div class="nav-section">
+            <span class="nav-title">Révisions</span>
+            <a href="#" class="nav-item">📝 DS S3</a>
+            <div class="sub-nav">
+                <a href="#fiches">Fiches de synthèse</a>
+            </div>
+        </div>
+    </sidebar>
+
+    <!-- Zone d'affichage du contenu -->
+    <main>
+        <div class="header-banner">
+            <h2>Tableau de Bord S3</h2>
+            <p>Retrouvez l'ensemble de vos cours, fiches de révision et suivis de projets structurés.</p>
+        </div>
+
+        <div class="content-card">
+            <!-- Le contenu généré de ton Google Doc s'injectera ici proprement -->
+            {{ content }}
+        </div>
+    </main>
+
 </body>
 </html>
