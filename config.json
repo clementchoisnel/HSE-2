@@ -1,0 +1,14 @@
+{
+  "titre": "Cours HSE",
+  "niveau1": [],
+  "documents": [
+    {
+      "nom": "Matière 1",
+      "url": "METS_TON_LIEN_GOOGLE_DOC_1_ICI"
+    },
+    {
+      "nom": "Matière 2",
+      "url": "METS_TON_LIEN_GOOGLE_DOC_2_ICI"
+    }
+  ]
+}
